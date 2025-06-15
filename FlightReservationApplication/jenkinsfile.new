@@ -41,6 +41,7 @@ pipeline {
                     cd FlightReservationApplication
                     docker build -t shashanki12/flight-reservation-app:latest .
                     docker push shashanki12/flight-reservation-app:latest
+                    docker rmi `docker image list -aq`
                 '''
             }
         }
@@ -52,7 +53,17 @@ pipeline {
                 '''
             }
         }
-        
+}
+        post {
+            success {
+                echo 'Pipeline completed successfully!'
+            }
+            failure {
+                echo 'Pipeline failed!'
+            }
+            always {
+                cleanWs()
+        }
     }
 }
 
