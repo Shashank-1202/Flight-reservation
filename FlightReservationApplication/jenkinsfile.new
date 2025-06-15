@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh '''
                     cd FlightReservationApplication
-                    docker build -t shashanki12/flight-reservation-app:latest
+                    docker build -t shashanki12/flight-reservation-app:latest .
                     docker push shashanki12/flight-reservation-app:latest
                 '''
             }
