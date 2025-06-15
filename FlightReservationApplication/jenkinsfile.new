@@ -15,17 +15,17 @@ pipeline {
 
             }
         }
-        stage ('QA-Test') {
-            steps {
-                withSonarQubeEnv('soanrqube') {
+        stage('QA-TEST') {
+            steps{
+                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar-cred') {
                     sh '''
                     cd FlightReservationApplication
                     mvn sonar:sonar -Dsonar.projectKey=flightreservation_application
--Dsonar.projectKey=flightreservation_application
-                    '''
+                '''
                 }
             }
         }
+        
         stage ('Quality Gate') {
             steps {
                 timeout(10) {
